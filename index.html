@@ -11,7 +11,25 @@
     <h1>Vue 3</h1>
     <div id="app">
         <!-- <p>the final empire</p> -->
-        <p>{{ title }}</p>
+        <!-- <p>{{ title }} - Authored by {{ author }} who is {{ age }} years old.</p> -->
+        <button v-on:click="age++">Increase Age</button>
+        <button v-on:click="age--">Decrease Age</button>
+        <!-- <div @click="title = 'something else'">Change book title</div> -->
+        <div @click="changeTitle('Oathbringer')">Change book title</div>
+        <div v-if="showBooks">
+            <p>{{ title }} - Authored by {{ author }} who is {{ age }} years old.</p>
+        </div>
+        <button @click="toggleShowBooks">
+            <!-- <span v-if="showBooks">Hide Books</span>
+            <span v-if="!showBooks">Show Books</span> -->
+            <span v-if="showBooks">Hide Books</span> 
+            <!-- v-if: takes it out of the DOM completely if false -->
+            <span v-else>Show Books</span>
+        </button>
+
+        <div v-show="showBooks">currently showing books</div>
+        <!-- uses CSS: display: block; when true && display: none; when false -->
+
     </div>
 
     <script src="./app.js"></script>
