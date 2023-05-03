@@ -70,6 +70,14 @@
         <!-- attribute binding -->
         <!-- <a v-bind:href="url" target="__blank">best website ever</a> -->
         <a :href="url" target="__blank">best website ever</a>
+        <br>
+        <br>
+
+        <!-- computed properties -->
+        <div v-for="filteredBook in filteredBooks">
+            <h4>{{ filteredBook.title }}</h4>
+        </div>
+        
     </div>
 
     <script src="./app.js"></script>
