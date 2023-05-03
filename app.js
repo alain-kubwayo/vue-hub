@@ -8,9 +8,9 @@ const app = Vue.createApp({
             author: 'Brandon Sanderson',
             age: 45,
             books: [
-                { title: "name of the wind", author: "patrick rothfuss", img: "./assets/1.webp" },
-                { title: "the way of the kings", author: "brandon sanderson", img: "./assets/2.jpeg" },
-                { title: "the final empire", author: "brandon sanderson", img: "./assets/3.jpeg" }
+                { title: "name of the wind", author: "patrick rothfuss", img: "./assets/1.webp", isFav: true },
+                { title: "the way of the kings", author: "brandon sanderson", img: "./assets/2.jpeg", isFav: false },
+                { title: "the final empire", author: "brandon sanderson", img: "./assets/3.jpeg", isFav: true }
             ],
             x: 0,
             y: 0,
@@ -33,6 +33,9 @@ const app = Vue.createApp({
             // console.log(e)
             this.x = e.offsetX;
             this.y = e.offsetY;
+        },
+        toggleFav(book){
+            book.isFav=!book.isFav
         }
     }
 })
