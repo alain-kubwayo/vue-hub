@@ -7,6 +7,11 @@ const app = Vue.createApp({
             title: 'The Final Empire',
             author: 'Brandon Sanderson',
             age: 45,
+            books: [
+                { title: "name of the wind", author: "patrick rothfuss" },
+                { title: "the way of the kings", author: "brandon sanderson" },
+                { title: "the final empire", author: "brandon sanderson" }
+            ],
             x: 0,
             y: 0
         }
@@ -20,8 +25,8 @@ const app = Vue.createApp({
             this.showBooks = !this.showBooks
         },
         handleEvent(e, data){
-            console.log(e, e.type);
-            if(data) console.log(data);
+            // console.log(e, e.type);
+            // if(data) console.log(data);
         },
         handleMousemove(e){
             // console.log(e)
