@@ -1,5 +1,5 @@
 <template>
-    <div class="block" v-if="showBlock" @click="stopTimer">click me {{ delay }}</div>
+    <div class="block" v-if="showBlock" @click="stopTimer">click me</div>
 </template>
 
 <script>
@@ -34,7 +34,8 @@ export default {
         },
         stopTimer(){
             clearInterval(this.timer)
-            console.log(this.reactionTime)
+            // console.log(this.reactionTime)
+            this.$emit('end', this.reactionTime)
         }
     }
 }
