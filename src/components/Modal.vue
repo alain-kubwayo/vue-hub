@@ -4,8 +4,11 @@
             <!-- <h1>{{ header }}</h1>
             <p>{{ text }}</p> -->
             <slot>default content</slot>
-            <div class="actions">
+            <!-- <div class="actions">
                 <slot name="links"></slot>
+            </div> -->
+            <div>
+                <slot name="bootcamp"></slot>
             </div>
         </div>
     </div>

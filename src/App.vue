@@ -18,7 +18,16 @@
       <p>Grab your ninja swag for half price!</p>
     </Modal>
   </div>
+  <div v-if="showModalTwo">
+    <Modal @close="toggleModalTwo">
+      <template v-slot:bootcamp>
+        <h1>The Gym - Sotware Development Training Program</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam ipsam, debitis sint architecto labore tempora nostrum. Adipisci veniam mollitia harum error soluta totam pariatur. Earum cupiditate delectus nam repellendus consequuntur.</p>
+      </template>
+    </Modal>
+  </div>
   <button @click.alt="toggleModal">Open Modal (alt)</button>
+  <button @click="toggleModalTwo">Open Modal Two</button>
 </template>
 
 <script>
@@ -34,17 +43,21 @@ export default {
       title: "My First Vue App :)",
       header: "Signup for the giveaway!",
       text: "Grab your ninja swag for half price!",
-      showModal: false
+      showModal: false,
+      showModalTwo: false,
     }
   },
   methods: {
     handleClick(){
-      // console.log(this.$refs.name);
+      // console.log(this.$refs.name)
       this.$refs.name.classList.add('active')
-      this.$refs.name.focus();
+      this.$refs.name.focus()
     },
     toggleModal(){
-      this.showModal = !this.showModal;
+      this.showModal = !this.showModal
+    },
+    toggleModalTwo(){
+      this.showModalTwo = !this.showModalTwo
     }
   }
 }
