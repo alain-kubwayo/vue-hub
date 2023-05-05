@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import PostList from '../components/PostList.vue'
+import getPosts from '../composables/getPosts'
 
 export default {
   name: 'Home',
@@ -24,26 +25,30 @@ export default {
     //   { title: 'welcome to the blog', body: 'Lorem', id: 1 },
     //   { title: 'top 5 CSS tips', body: 'Lorem', id: 2 }
     // ])
-    const posts = ref([])
-    const error = ref(null)
+    // const posts = ref([])
+    // const error = ref(null)
 
     // const showPosts = ref(true)
 
-    const load = async () => {
-      try {
-        const res = await fetch('http://localhost:3000/posts')
-        if(!res.ok){
-          throw Error('no data available')
-        }
-        posts.value = await res.json()
-      }
-      catch (err){
-        error.value = err.message
-        console.log(error.value)
-      }
-    }
+    // const load = async () => {
+    //   try {
+    //     const res = await fetch('http://localhost:3000/posts')
+    //     if(!res.ok){
+    //       throw Error('no data available')
+    //     }
+    //     posts.value = await res.json()
+    //   }
+    //   catch (err){
+    //     error.value = err.message
+    //     console.log(error.value)
+    //   }
+    // }
 
-    load()
+    // load()
+
+    const {posts, error, load} = getPosts();
+
+    load();
   
     // return { posts, showPosts }
     return { posts, error }
