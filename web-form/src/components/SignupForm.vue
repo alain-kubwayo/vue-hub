@@ -11,10 +11,37 @@
             <option value="developer">Web Developer</option>
             <option value="designer">Web Designer</option>
         </select>
+
+        <label>Skills:</label>
+        <input type="text" v-model="tempSkill" @keyup.alt="addSkill">
+        <div v-for="skill in skills" :key="skill" class="pill">
+            {{ skill }}
+        </div>
+
+        <div class="terms">
+            <input type="checkbox" v-model="terms" required>
+            <label>Accept terms and conditions</label>
+        </div>
+
+        <!-- <div>
+            <input type="checkbox" value="alain" v-model="names">
+            <label>alain</label>
+        </div>
+        <div>
+            <input type="checkbox" value="james" v-model="names">
+            <label>james</label>
+        </div>
+        <div>
+            <input type="checkbox" value="caren" v-model="names">
+            <label>caren</label>
+        </div> -->
     </form>
     <p>Email: {{ email }}</p>
     <p>Password: {{ password }}</p>
     <p>Role: {{ role }}</p>
+    <p>Terms accepted: {{ terms }}</p>
+    <!-- <p>Names: {{ names }}</p> -->
+    <p>Skills: {{ skills }}</p>
 </template>
 
 <script>
@@ -23,7 +50,22 @@ export default {
         return {
             email: '',
             password: '',
-            role: 'designer'
+            role: 'designer',
+            terms: false,
+            // names: [],
+            tempSkill: '',
+            skills: []
+        }
+    },
+    methods: {
+        addSkill(e){
+            // console.log(e);
+            if(e.key === ',' && this.tempSkill){
+                if(!this.skills.includes(this.tempSkill)){
+                    this.skills.push(this.tempSkill)
+                } 
+                this.tempSkill = ''
+            }
         }
     }
 }
@@ -55,6 +97,13 @@ input, select {
     border: none;
     border-bottom: 1px solid #ddd;
     color: #555;
+}
+input[type="checkbox"]{
+    display: inline-block;
+    width: 16px;
+    margin: 0 10px 0 0;
+    position: relative;
+    top: 2px;
 }
 
 </style>
