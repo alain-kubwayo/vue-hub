@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit.prevent="handleSubmit">
         <label>Email:</label>
         <input type="email" required v-model="email">
 
@@ -36,6 +36,9 @@
             <input type="checkbox" value="caren" v-model="names">
             <label>caren</label>
         </div> -->
+        <div class="submit">
+            <button>Create an Account</button>
+        </div>
     </form>
     <p>Email: {{ email }}</p>
     <p>Password: {{ password }}</p>
@@ -70,6 +73,9 @@ export default {
         },
         deleteSkill(skill){
             this.skills = this.skills.filter(item => item !== skill);
+        },
+        handleSubmit(){
+            console.log('form submitted');
         }
     }
 }
@@ -120,5 +126,17 @@ input[type="checkbox"]{
     font-weight: bold;
     color: #777;
     cursor: pointer;
+}
+button {
+    background: #0b6dff;
+    border: 0;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.submit {
+    text-align: center;
 }
 </style>
