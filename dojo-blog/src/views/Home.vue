@@ -13,11 +13,17 @@
     <h2>Reactive</h2>
     <p>{{ ninjaTwo.name }} - {{ ninjaTwo.age }}</p>
     <button @click="updateNinjaTwo">Update ninja two</button>
+    <!-- Computed property -->
+    <!-- <p>Computed: {{ firstName }}</p> -->
+    <input type="text" v-model="search">
+    <p>Search term - {{ search }}</p>
+    <!-- <div v-for="name in names" :key="name">{{ name }}</div> -->
+    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
   </div>
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
 export default {
   name: 'Home',
@@ -52,8 +58,19 @@ export default {
       ninjaTwo.age = 34
     }
 
+    // Computed properties
+    // const firstName = computed(() => {
+    //   return 'teresa'
+    // })
+    const search = ref('')
+    const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
+
+    const matchingNames = computed(() => {
+      return names.value.filter(name => name.includes(search.value))
+    })
+
     // return { name, age, handleClick, p }
-    return { name, age, handleClick, ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo }
+    return { name, age, handleClick, ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, names, search, matchingNames }
   }
 }
 </script>
