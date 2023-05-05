@@ -19,11 +19,12 @@
     <p>Search term - {{ search }}</p>
     <!-- <div v-for="name in names" :key="name">{{ name }}</div> -->
     <div v-for="name in matchingNames" :key="name">{{ name }}</div>
+    <button @click="handleClicked">Stop watching</button>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, watch, watchEffect } from 'vue'
 
 export default {
   name: 'Home',
@@ -65,12 +66,26 @@ export default {
     const search = ref('')
     const names = ref(['mario', 'yoshi', 'luigi', 'toad', 'bowser', 'koopa', 'peach'])
 
+    const stopWatch = watch(search, () => {
+      console.log('watch function ran')
+    })
+
+    const stopEffect = watchEffect(() => {
+      console.log('watchEffect function ran', search.value)
+      // get data from database and when id changes get new data again, etc.
+    })
+
     const matchingNames = computed(() => {
       return names.value.filter(name => name.includes(search.value))
     })
 
+    const handleClicked = () => {
+      stopWatch();
+      stopEffect();
+    }
+
     // return { name, age, handleClick, p }
-    return { name, age, handleClick, ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, names, search, matchingNames }
+    return { name, age, handleClick, ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, names, search, matchingNames, handleClicked }
   }
 }
 </script>
