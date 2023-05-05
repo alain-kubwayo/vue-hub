@@ -7,11 +7,17 @@
     <button @click="handleClick">click me</button>
     <button @click="age++">Add 1 to age</button>
     <input type="text" v-model="name">
+    <h2>Refs</h2>
+    <p>{{ ninjaOne.name }} - {{ ninjaOne.age }}</p>
+    <button @click="updateNinjaOne">Update ninja one</button>
+    <h2>Reactive</h2>
+    <p>{{ ninjaTwo.name }} - {{ ninjaTwo.age }}</p>
+    <button @click="updateNinjaTwo">Update ninja two</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 export default {
   name: 'Home',
@@ -33,8 +39,21 @@ export default {
       age.value = 35
     }
 
+    const ninjaOne = ref({ name: 'aline', age: 29 })
+    const ninjaTwo = reactive({ name: 'caren', age: 43 })
+
+    // drawbacks: we can't use reactive with primitive types. They will show but won't be reactive
+
+    const updateNinjaOne = () => {
+      ninjaOne.value.age = 40
+    }
+
+    const updateNinjaTwo = () => {
+      ninjaTwo.age = 34
+    }
+
     // return { name, age, handleClick, p }
-    return { name, age, handleClick }
+    return { name, age, handleClick, ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo }
   }
 }
 </script>
