@@ -5,9 +5,10 @@
 
 <script>
 export default {
+    props: ['id'],
     data() {
         return {
-            id: this.$route.params.id
+            // id: this.$route.params.id // since now id is being accepted as a prop
         }
     }
 }
