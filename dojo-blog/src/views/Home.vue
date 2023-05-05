@@ -1,9 +1,14 @@
 <template>
   <div class="home">
     <h1>homepage</h1>
-    <PostList :posts="posts" v-if="showPosts" />
-    <button @click="showPosts = !showPosts">toggle posts</button>
-    <button @click="posts.pop()">delete a post</button>
+    <!-- <PostList :posts="posts" v-if="showPosts" /> -->
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <PostList :posts="posts" />
+    </div>
+    <div v-else>Loading...</div>
+    <!-- <button @click="showPosts = !showPosts">toggle posts</button>
+    <button @click="posts.pop()">delete a post</button> -->
   </div>
 </template>
 
@@ -15,14 +20,34 @@ export default {
   name: 'Home',
   components: { PostList },
   setup() {
-    const posts = ref([
-      { title: 'welcome to the blog', body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio unde corrupti consequuntur molestiae ipsam dolore minus magnam, amet adipisci temporibus, maxime tempora obcaecati quod ullam iusto? Ab odit natus aliquid sed provident ea consequatur voluptatem, tempore eligendi rerum modi, esse praesentium. Nam aliquid hic, eligendi rerum neque corporis accusantium aperiam.', id: 1 },
-      { title: 'top 5 CSS tips', body: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio unde corrupti consequuntur molestiae ipsam dolore minus magnam, amet adipisci temporibus, maxime tempora obcaecati quod ullam iusto? Ab odit natus aliquid sed provident ea consequatur voluptatem, tempore eligendi rerum modi, esse praesentium. Nam aliquid hic, eligendi rerum neque corporis accusantium aperiam.', id: 2 }
-    ])
+    // const posts = ref([
+    //   { title: 'welcome to the blog', body: 'Lorem', id: 1 },
+    //   { title: 'top 5 CSS tips', body: 'Lorem', id: 2 }
+    // ])
+    const posts = ref([])
+    const error = ref(null)
 
-    const showPosts = ref(true)
+    // const showPosts = ref(true)
+
+    const load = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/posts')
+        if(!res.ok){
+          throw Error('no data available')
+        }
+        posts.value = await res.json()
+      }
+      catch (err){
+        error.value = err.message
+        console.log(error.value)
+      }
+    }
+
+    load()
   
-    return { posts, showPosts }
+    // return { posts, showPosts }
+    return { posts, error }
+
   }
 }
 </script>
